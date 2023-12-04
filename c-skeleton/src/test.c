@@ -19,7 +19,7 @@ int main(int argc, char **argv){
     int (*add_test)(int a, int b) = NULL;
 
     // open the dynamic library file
-    handle = dlopen("/home/jixiang/practice/learn_c_and_semester/c_pra/c-skeleton/build/lib.so", RTLD_LAZY);
+    handle = dlopen("./build/lib.so", RTLD_LAZY);
 
     if(handle == NULL){
         fprintf(stderr, "%s", dlerror());

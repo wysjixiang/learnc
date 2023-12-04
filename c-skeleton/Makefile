@@ -1,9 +1,10 @@
 
-OUTPUT = out
+OUTPUT = bin/out
 SRC = $(wildcard src/**/*.c src/*.c)
 OBJ = $(patsubst %.c,%.o,$(SRC))
 
-CFLAGS = -g -O2 -Wall -Werror -Isrc -rdynamic $(OPTFLAGS)
+CFLAGS = -g -O2 -Wall -DNDEBUG_s -Isrc -rdynamic $(OPTFLAGS)
+# first you need to know that when you use $(patsubst %.c,%.o,$(SRC)) to generate the object files, the makefile system will automatically find CFLAGS and uses it!!
 # -Isrc: include /src folder when compiling. -I: include
 # -rdynamic: used when linking dynamic lib. it writes string tables
 # to executable files so it can parse the string table
@@ -23,7 +24,7 @@ SO_TARGET = $(patsubst %.a,%.so,$(TARGET))
 # test!
 lib: $(TARGET) $(SO_TARGET) 
 lib_test: lib
-	gcc -o $(OUTPUT) src/test.c $(TARGET) $(LIBS)
+	gcc -o $(OUTPUT) $(OBJ) $(TARGET) $(CFLAGS) $(LIBS)
 	./$(OUTPUT)
 
 
